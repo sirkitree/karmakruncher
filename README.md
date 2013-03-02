@@ -8,7 +8,7 @@ _Displays karma in a pie chart and list._
 	~$ npm install
 	~$ cp routes/data.json.template routes/data.json
 	~$ cp routes/config.json.template routes/config.json
-	
+
 Open the config.json file and fill out the LDAP details.
 	~$ node app.js
 
