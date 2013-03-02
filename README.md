@@ -9,6 +9,7 @@ _Displays karma in a pie chart and list._
 	~$ cp routes/data.json.template routes/data.json
 	~$ cp routes/config.json.template routes/config.json
 
+
 Open the config.json file and fill out the LDAP details.
 	~$ node app.js
 
@@ -19,3 +20,4 @@ Open the config.json file and fill out the LDAP details.
 
 ### Plans
 1. Gather a list of IRC bots, grab and add up the Karma values for the nicks given.
+1. Periodically update the data.json file, perhaps nightly.
