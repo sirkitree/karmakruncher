@@ -1,7 +1,7 @@
 ## KarmaKruncher
 _Displays karma in a pie chart and list._
 
-![img](http://monosnap.com/image/zPuNpf9MBg192odT6k5mvL0sY.png)
+![](https://api.monosnap.com/image/download?id=zPuNpf9MBg192odT6k5mvL0sY)
 
 ### Installation
 	~$ git checkout
