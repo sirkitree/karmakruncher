@@ -10,6 +10,7 @@ _Displays karma in a pie chart and list._
 	~$ cp routes/config.json.template routes/config.json
 
 Open the config.json file and fill out the LDAP details.
+	
 	~$ node app.js
 
 ### Technicals
