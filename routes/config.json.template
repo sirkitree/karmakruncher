@@ -1,0 +1,13 @@
+{
+    "ldap": {
+        "url": "",
+        "dn": "",
+        "pass": "",
+        "base": "",
+        "opts": {
+            "scope": "",
+            "filter": "",
+            "attributes": ["", ""]
+        }
+    }
+}

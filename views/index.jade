@@ -1,0 +1,35 @@
+extends layout
+
+block body
+  
+  div.navbar
+    div.navbar-inner
+      a.brand(href="/") KarmaKruncher
+    
+
+  div.container
+    h3 Karma
+    div.insight.hero-unit
+      
+      sidebar
+
+      div(ng-controller="KarmaKtrl").table-wrapper
+        table.table.table-hover
+          thead
+            tr
+              th #
+              th Nick
+              th Karma
+            
+          tbody
+            <!-- ngRepeat: row in data -->
+            tr(class="bot", ng-repeat="nick in nicks")
+              td {{$index+1}}
+              td {{nick.name}} 
+              td {{nick.karma}}
+
+  script(src="http://d3js.org/d3.v3.min.js")
+  script(src='js/chart.js')
+  script(src='js/lib/angular/angular.js')
+  script(src='js/app.js')
+  script(src='js/controllers.js')
