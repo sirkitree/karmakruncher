@@ -5,7 +5,7 @@
 exports.nicks = function (req, res) {
 
   var fs = require('fs')
-    , datafilepath = __dirname + "/data.json"
+    , datafilepath = "./data.json"
     , data = require(datafilepath);
 
     if (data.nicks.length !== 0) {
@@ -20,8 +20,7 @@ exports.nicks = function (req, res) {
 
       // Connect to LDAP to retrieve all IRC nicks
 
-      var configfilepath = __dirname + "/config.json"
-        , config = require(configfilepath)
+      var config = require("./config.json")
         , ldap = require('ldapjs')
         , client = ldap.createClient({
             url: config.ldap.url
