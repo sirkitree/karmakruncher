@@ -90,7 +90,7 @@ function mysqlLoad (nicks, result) {
 
           // Execute php on the host machine to turn the database array
           // into a json object which we can work with.
-          if (fileStats.name == 'settings.php') {
+          if (fileStats.name === 'settings.php') {
             var command = 'php -r \'include("' + root + '/' + fileStats.name + '"); print json_encode($databases);\'';
             runner.exec(
               command, 
@@ -139,13 +139,14 @@ function mysqlLoad (nicks, result) {
 };
 
 function addEmUp(rows, nicks) {
+  console.log('tick');
   // Iterate over the rows returned from mysql.
   for (var i = rows.length - 1; i >= 0; i--) {
     // Iterate over our nicks.
     for (var j = nicks.length - 1; j >= 0; j--) {
       // If the current term is in our nicks (which is should be cuz that's 
         // what we started with) add up the karma points.
-      if (rows[i].term === nicks[j].name) {
+      if (rows[i].term === nicks[j].name.toLowerCase()) {
         // update the karma
         nicks[j].karma += parseInt(rows[i].karma);
       }
