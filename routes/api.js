@@ -30,7 +30,7 @@ exports.ldapLoad = function (request, result) {
     , pass = config.ldap.pass
     , base = config.ldap.base
     , opts = config.ldap.opts
-    , names = [];
+    , nicks = [];
     
   client.bind(dn, pass, function(err) {
     if (err) { console.log(err); return; }
@@ -41,7 +41,7 @@ exports.ldapLoad = function (request, result) {
 
     res.on('searchEntry', function(entry) {
       if (typeof entry.object.irc !== 'undefined') {
-        names.push({ 
+        nicks.push({ 
           "name" : entry.object.irc
         });
       }
@@ -49,11 +49,11 @@ exports.ldapLoad = function (request, result) {
 
     // Save to file for quick retrieval next call.
     res.on('end', function(res) {
-      karmaSave(names, datafilepath);
+      karmaSave(nicks, datafilepath);
 
       // Return the data from the api call.
       result.json({
-        "nicks": names
+        "nicks": nicks
       });
     });
 
