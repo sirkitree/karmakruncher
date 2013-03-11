@@ -131,9 +131,7 @@ function mysqlLoad (nicks, result) {
 
   // Return nicks to our result.
   dirwalk.on('end', function() {
-    result.json({
-      "nicks": nicks
-    });
+    result.send("Updated nicks from ldap: " + names.join(', ') + "\n <a href='/'>return</a>");
   });
 };
 
