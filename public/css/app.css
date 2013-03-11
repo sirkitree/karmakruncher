@@ -38,8 +38,12 @@
 
 sidebar {
   display: inline;
+  float: left;
 }
 
+.insight {
+  height: 400px;
+}
 .insight .chart .svg {
   float: left;
 }
@@ -52,7 +56,6 @@ path {
   float: right;
   width: 225px;
   height: 400px;
-  margin-left: 40px;
   overflow-y: scroll;
   overflow-x: hidden;
 }

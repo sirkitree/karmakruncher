@@ -4,7 +4,7 @@ d3Chart = function(data) {
   h = 400,                            //height
   r = 200;                            //radius
   // todo, limit this to the top 5 or 10
-  data = [data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9]],
+  data = [data[0], data[1], data[2], data[3], data[4], data[5]],
   color = d3.scale.category20c();     //builtin range of colors
 
   var vis = d3.select("sidebar")
