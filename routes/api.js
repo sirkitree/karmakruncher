@@ -90,37 +90,40 @@ function mysqlLoad (nicks, result) {
 
           // Execute php on the host machine to turn the database array
           // into a json object which we can work with.
-          runner.exec(
-            'php -r \'include("' + root + '/' + fileStats.name + '"); print json_encode($databases);\'', 
-            function (err, stdout, stderr) {
+          if (fileStats.name == 'settings.php') {
+            var command = 'php -r \'include("' + root + '/' + fileStats.name + '"); print json_encode($databases);\'';
+            runner.exec(
+              command, 
+              function (err, stdout, stderr) {
 
-              // Parse stdout into JSON.
-              var connectTo = JSON.parse(stdout).default.default
-                // Use our parsed variables to establish a connection to mysql.
-                , connection = mysql.createConnection({
-                  host: connectTo.host,
-                  user: connectTo.username,
-                  password: connectTo.password,
-                  database: connectTo.database
+                // Parse stdout into JSON.
+                var connectTo = JSON.parse(stdout).default.default
+                  // Use our parsed variables to establish a connection to mysql.
+                  , connection = mysql.createConnection({
+                    host: connectTo.host,
+                    user: connectTo.username,
+                    password: connectTo.password,
+                    database: connectTo.database
+                  });
+
+                connection.connect();
+
+                // Run our previously crafted query.
+                connection.query(query, function (err, rows, fields) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    // Add the newly retrieved karma to an array
+                    addEmUp(rows, nicks);
+                  }
+
                 });
+                connection.end();
 
-              connection.connect();
-
-              // Run our previously crafted query.
-              connection.query(query, function (err, rows, fields) {
-                if (err) {
-                  console.log(err);
-                } else {
-                  // Add the newly retrieved karma to an array
-                  addEmUp(rows, nicks);
-                }
-
-              });
-              connection.end();
-
-              next();
-            }
-          );
+                next();
+              }
+            );
+          } 
         
         });
       }
