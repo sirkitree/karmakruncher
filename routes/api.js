@@ -1,24 +1,34 @@
 /*
  * Serve JSON to our AngularJS client
  */
-var datafilepath = "./data.json";
 
 exports.nicks = function (req, res) {
+  var data = require('./data.json');
+  if (data.nicks.length !== 0) {
+    // Return the data from the api call.
+    res.json(data);
+  } else {
+    // If length is 0 then we don't have valid nicks so get them from ldap.
+    ldapLoad(req, res);
+  }
+};
 
-    var data = require(datafilepath);
+exports.ldapLoad = function (req, res) {
+  ldapLoad(req, res);
+};
 
-    if (data.nicks.length !== 0) {
-      // Return the data from the api call.
-      res.json(data);
+function karmaSave (data, filepath) {
+  var fs = require('fs');
 
-    } else {
-      // If length is 0 then we don't have valid nicks so get them from ldap.
-      ldapLoad(req, res);
-    }
+  // Write the data to file for quick retrieval.
+  fs.writeFile(filepath, JSON.stringify({"nicks": data}, null, 4), function(err) {
+    if (err) { console.log(err); return; } 
+    console.log("The file was saved!");  
+  });
 
 };
 
-exports.ldapLoad = function (request, result) {
+function ldapLoad (request, result) {
 
   // Connect to LDAP to retrieve all IRC nicks
   var config = require("./config.json")
@@ -49,7 +59,7 @@ exports.ldapLoad = function (request, result) {
 
     // Save to file for quick retrieval next call.
     res.on('end', function(res) {
-      karmaSave(nicks, datafilepath);
+      karmaSave(nicks, './routes/data.json');
 
       // Return the data from the api call.
       result.json({
@@ -58,16 +68,4 @@ exports.ldapLoad = function (request, result) {
     });
 
   });
-
-};
-
-function karmaSave (data, filepath) {
-  var fs = require('fs');
-
-  // Write the data to file for quick retrieval.
-  fs.writeFile(filepath, JSON.stringify({"nicks": data}, null, 4), function(err) {
-    if (err) { console.log(err); return; } 
-    console.log("The file was saved!");  
-  });
-
-};
+}
