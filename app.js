@@ -32,6 +32,7 @@ app.get('/', routes.index);
 
 // JSON API
 app.get('/api/nicks', api.nicks);
+app.get('/api/ldap', api.ldapLoad);
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
