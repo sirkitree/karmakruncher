@@ -4,10 +4,7 @@ var walk = require('walk')
   , runner = require('child_process')
   , mysql = require('mysql')
   , nicks = require('./routes/data.json').nicks
-  , names = []
-  , total = {}
-  , bots = []
-  , lullabots = [];
+  , names = [];
 
 for (var i = nicks.length - 1; i >= 0; i--) {
   // Reset all Karma to 0 so we're only getting new values.
@@ -72,17 +69,19 @@ dirwalk.on('directories', function (root, dirStatsArray, next) {
 });
 
 function addEmUp(rows) {
-  // console.log(bot);
+  // Iterate over the rows returned from mysql.
   for (var i = rows.length - 1; i >= 0; i--) {
-    console.log(rows[i]);
+    // Iterate over our nicks.
     for (var j = nicks.length - 1; j >= 0; j--) {
+      // If the current term is in our nicks (which is should be cuz that's 
+        // what we started with) add up the karma points.
       if (rows[i].term === nicks[j].name) {
         // update the karma
         nicks[j].karma += parseInt(rows[i].karma);
       }
     };
   };
-  
+
   // Save our nicks array to data.json.
   fs.writeFile('./routes/data.json', JSON.stringify({"nicks": nicks}, null, 4), function(err) {
     if (err) {

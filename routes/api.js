@@ -11,15 +11,16 @@ exports.nicks = function (req, res) {
     if (data.nicks.length !== 0) {
 
       // Return the data from the api call.
-      console.log('retrieved from file.');
       res.json(data);
 
     } else {
 
       // If length is 0 then we don't have valid nicks so get them from ldap.
 
-      // Connect to LDAP to retrieve all IRC nicks
+      // todo: overwrite data.json on a regular (weekly?) basis with a new list
+      // of nicks.
 
+      // Connect to LDAP to retrieve all IRC nicks
       var config = require("./config.json")
         , ldap = require('ldapjs')
         , client = ldap.createClient({
@@ -58,20 +59,18 @@ exports.nicks = function (req, res) {
       
     }
 
-  
   karmaSave = function(data, filepath) {
 
     // Write the data to file for quicker retrieval.
     fs.writeFile(filepath, JSON.stringify({"nicks": data}, null, 4), function(err) {
       if (err) {
-          console.log(err);
+        console.log(err);
       } else {
-          console.log("The file was saved!");
+        console.log("The file was saved!");
       }
     });
 
     // Return the data from the api call.
-    console.log('retrieved from ldap.');
     res.json({
       "nicks": data
     });
