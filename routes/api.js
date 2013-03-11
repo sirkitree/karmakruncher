@@ -30,9 +30,7 @@ exports.ldapLoad = function (request, result) {
     , pass = config.ldap.pass
     , base = config.ldap.base
     , opts = config.ldap.opts
-    , name = []
-    , names = []
-    , data = [];
+    , names = [];
     
   client.bind(dn, pass, function(err) {
     if (err) { console.log(err); return; }
@@ -58,7 +56,7 @@ exports.ldapLoad = function (request, result) {
         "nicks": names
       });
     });
-    
+
   });
 
 };
