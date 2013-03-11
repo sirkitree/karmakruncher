@@ -8,7 +8,7 @@ block body
     
 
   div.container
-    h3 Karma
+    h3 Lullabot Karma
     div.insight.hero-unit
       
       sidebar
@@ -27,6 +27,12 @@ block body
               td {{$index+1}}
               td {{nick.name}} 
               td {{nick.karma}}
+    p.center 
+      i This is an aggregation of all the karma across our various bots in our various chat rooms in IRC.
+    p.center
+      i To modify or help improve, please send pull requests to 
+      a(href='https://github.com/sirkitree/karmakruncher', title='github') https://github.com/sirkitree/karmakruncher
+      .
 
   script(src="http://d3js.org/d3.v3.min.js")
   script(src='js/chart.js')

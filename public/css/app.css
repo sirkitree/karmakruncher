@@ -59,3 +59,8 @@ path {
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+.center {
+  width: 100%;
+  text-align: center;
+}
