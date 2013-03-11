@@ -15,10 +15,10 @@ Open the config.json file and fill out the LDAP details.
 	~$ node app.js
 
 ### Technicals
-1. Read nick and karma data from data.json
-1. If the file has no nicks it will attempt to connect to your ldap server to retrieve them
-1. Currently randomizes karma.
+1. Grabs a list of nicks from ldap.
+1. Gathers a list of IRC bots we're running out of php.
+1. Grabs and adds up all of the Karma values for the nicks given.
+1. Writes/reads nick and karma data from data.json on page load.
 
 ### Plans
-1. Gather a list of IRC bots, grab and add up the Karma values for the nicks given.
 1. Periodically update the data.json file, perhaps nightly.
