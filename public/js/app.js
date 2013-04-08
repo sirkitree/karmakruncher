@@ -2,17 +2,9 @@
 
 
 // Declare app level module which depends on filters, and services
-angular
-  .module('myApp', [])
-  .config(
-    [
-      '$routeProvider', 
-      '$locationProvider', 
-      function($routeProvider, $locationProvider) {
-        $routeProvider
-        	.when('/karmak', { controller: KarmaKtrl })
-        	.otherwise({ redirectTo: '/karmak' });
-        $locationProvider.html5Mode(true);
-      }
-    ]
-  );
+angular.module('myApp', []).
+  config(function($routeProvider) {
+    $routeProvider.
+      when('/', {controller:KarmaKtrl, templateUrl:'aside.html'}).
+    	otherwise({redirectTo:'/'});
+  });

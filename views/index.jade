@@ -13,20 +13,8 @@ block body
       
       sidebar
 
-      div(ng-controller="KarmaKtrl").table-wrapper
-        table.table.table-hover
-          thead
-            tr
-              th #
-              th Nick
-              th Karma
-            
-          tbody
-            <!-- ngRepeat: row in data -->
-            tr(class="bot", ng-repeat="nick in nicks")
-              td {{$index+1}}
-              td {{nick.name}} 
-              td {{nick.karma}}
+      aside(ng-view)
+
     p.center 
       i This is an aggregation of all the karma across our various bots in our various chat rooms in IRC.
     p.center

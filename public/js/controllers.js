@@ -9,7 +9,10 @@ function KarmaKtrl($scope, $http) {
       $scope.nicks = data.nicks.sort(function(a,b) { return parseFloat(b.karma) - parseFloat(a.karma) } );
 
       // call our chart function to draw our chart
-      d3Chart($scope.nicks);
+      if ($scope.nicks) {
+        d3Chart($scope.nicks);  
+      }
+      
     })
     .error(function(data, status, headers, config) {
       $scope.nicks = 'Error!'
