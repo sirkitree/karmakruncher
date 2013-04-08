@@ -7,7 +7,8 @@
           <th>Karma</th>
       </tr>
       <tbody>
-          <tr ng-repeat="nick in nicks" class="bot">
+          <tr><input type="text" ng-model="karmaSearch" class="search-query" placeholder="Search"></tr>
+          <tr class="bot" ng-repeat="nick in nicks | filter:karmaSearch">
             <td>{{$index+1}}</td>
             <td>{{nick.name}}</td>
             <td>{{nick.karma}}</td>
