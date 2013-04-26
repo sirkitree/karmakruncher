@@ -1,16 +1,13 @@
 /*
  * Serve JSON to our AngularJS client
  */
+var fs = require('fs');
 
-exports.nicks = function (req, res) {
-  var data = require('./data.json');
-  if (data.nicks.length !== 0) {
-    // Return the data from the api call.
-    res.json(data);
-  } else {
-    // If length is 0 then we don't have valid nicks so get them from ldap.
-    ldapLoad(req, res);
-  }
+exports.data = function (req, res) {
+  // Using readFileSync instead of require makes so we don't have to restart
+  // the app whenever the data.json file is updated.
+  var file = fs.readFileSync(__dirname + '/data.json', 'utf8');
+  res.json(JSON.parse(file));
 };
 
 exports.ldapLoad = function (req, res) {
