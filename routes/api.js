@@ -47,9 +47,8 @@ function ldapLoad (request, result) {
       }
     });
 
-    // Save to file for quick retrieval next call.
     res.on('end', function(res) {
-      // Return the data from the api call.
+      // Take the nicks we have and to a mysql operation.
       mysqlLoad(nicks, result);
     });
 
@@ -136,7 +135,6 @@ function mysqlLoad (nicks, result) {
 };
 
 function addEmUp(rows, nicks) {
-  console.log('tick');
   // Iterate over the rows returned from mysql.
   for (var i = rows.length - 1; i >= 0; i--) {
     // Iterate over our nicks.
@@ -151,7 +149,7 @@ function addEmUp(rows, nicks) {
   };
 
   karmaSave(nicks, './routes/data.json');
-};
+}
 
 function karmaSave (data, filepath) {
   var fs = require('fs');
@@ -162,4 +160,4 @@ function karmaSave (data, filepath) {
     console.log("The file was saved!");  
   });
 
-};
+}

@@ -5,9 +5,13 @@
 
 var express = require('express'),
   routes = require('./routes'),
-  api = require('./routes/api');
+  api = require('./routes/api'),
+  socket = require('./routes/socket.js');
 
-var app = module.exports = express();
+var app = module.exports = express(),
+  http = require('http'),
+  server = http.createServer(app),
+  io = require('socket.io').listen(server);
 
 // Configuration
 app.configure(function() {
@@ -37,7 +41,10 @@ app.get('/data.json', api.data);
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
+// Socket.io communication
+io.sockets.on('connection', socket);
+
 // Start server
-app.listen(3002, function(){
+server.listen(3002, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });

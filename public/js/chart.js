@@ -7,6 +7,9 @@ d3Chart = function(data) {
   data = [data[0], data[1], data[2], data[3], data[4], data[5]],
   color = d3.scale.category20c();     //builtin range of colors
 
+  // remove existing
+  d3.select('svg').remove();
+
   var vis = d3.select("sidebar")
     .append("svg:svg")              //create the SVG element inside the <body>
     .data([data])                   //associate our data with the document

@@ -8,5 +8,6 @@
     , "ldapjs": "0.6.2"
     , "walk" : "2.2.1"
     , "mysql" : "2.0.0-alpha7"
+    , "socket.io": ">= 0.9.6"
   }
 }
